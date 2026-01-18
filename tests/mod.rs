@@ -84,7 +84,7 @@ impl TestHarness {
             )
             .pfn_user_callback(Some(vulkan_debug_callback));
 
-        let debug_report_loader = debug_utils::Instance::new(&entry, &instance);
+        let debug_report_loader = debug_utils::Instance::load(&entry, &instance);
         let debug_callback = unsafe {
             debug_report_loader
                 .create_debug_utils_messenger(&debug_info, None)
@@ -139,7 +139,7 @@ impl TestHarness {
     pub fn create_allocator(&self) -> vk_mem::Allocator {
         let create_info =
             vk_mem::AllocatorCreateInfo::new(&self.instance, &self.device, self.physical_device);
-        vk_mem::Allocator::new(create_info).unwrap()
+        unsafe { vk_mem::Allocator::new(create_info).unwrap() }
     }
 }
 

@@ -10,8 +10,8 @@ use crate::AllocationCreateInfo;
 use crate::Allocator;
 use crate::PoolCreateInfo;
 use crate::RawPoolHandle;
-use ash::prelude::VkResult;
 use ash::vk;
+use ash::VkResult;
 
 /// Represents a custom memory pool.
 pub struct AllocatorPool<A: Deref<Target = Allocator> = Arc<Allocator>> {
